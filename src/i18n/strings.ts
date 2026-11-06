@@ -87,6 +87,7 @@ export const strings = {
   // Server errors, keyed by the API's `code` (DRAFT)
   INVALID_CREDENTIALS: { en: "Wrong phone number or password.", rw: "Nimero cyangwa ijambobanga sibyo." },
   LOGIN_LOCKED: { en: "Too many failed attempts. Try again later or reset your password.", rw: "Wagerageje kenshi. Ongera ugerageze nyuma cyangwa uhindure ijambobanga." },
+  PHONE_NOT_REGISTERED: { en: "No account uses this number. Check it and try again, or create an account.", rw: "Nta konti ikoresha iyi nimero. Yirebe neza wongere ugerageze, cyangwa ufungure konti." },
   ACCOUNT_SUSPENDED: { en: "This account has been suspended. Please contact support.", rw: "Iyi konti yarahagaritswe. Vugana n'ubufasha." },
   INVALID_CODE: { en: "That code is wrong or has expired.", rw: "Iyo kode si yo cyangwa yararangiye." },
   OTP_COOLDOWN: { en: "Please wait a moment before asking for another code.", rw: "Tegereza gato mbere yo gusaba indi kode." },
