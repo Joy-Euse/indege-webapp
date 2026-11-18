@@ -35,3 +35,11 @@ export function HomeRedirect() {
   if (state.status === "loading") return <FullPageSpinner />;
   return <Navigate to={state.status === "authenticated" ? homePathFor(state.user) : "/login"} replace />;
 }
+
+/** For one side of the app. Someone on the other side goes to their own dashboard instead. */
+export function RequireActiveRole({ role }: { role: "CUSTOMER" | "WORKER" }) {
+  const { state } = useAuth();
+  if (state.status !== "authenticated") return null;
+  if (state.user.activeRole !== role) return <Navigate to={homePathFor(state.user)} replace />;
+  return <Outlet />;
+}

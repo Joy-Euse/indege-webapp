@@ -1,5 +1,13 @@
-import { ArrowRight, CircleAlert, CircleCheck, Eye, EyeOff, Info, Lock } from "lucide-react";
-import { forwardRef, type InputHTMLAttributes, type ReactNode, useId, useState } from "react";
+import { ArrowRight, ChevronDown, CircleAlert, CircleCheck, Eye, EyeOff, Info, Lock } from "lucide-react";
+import {
+  forwardRef,
+  type InputHTMLAttributes,
+  type ReactNode,
+  type SelectHTMLAttributes,
+  type TextareaHTMLAttributes,
+  useId,
+  useState,
+} from "react";
 import type { FieldError as HookFormError } from "react-hook-form";
 import { type StringKey, strings } from "../i18n/strings";
 import { ApiError } from "../lib/api";
@@ -71,6 +79,56 @@ export const TextField = forwardRef<HTMLInputElement, InputProps>(function TextF
           className={inputText}
           {...input}
         />
+      </div>
+    </FieldShell>
+  );
+});
+
+type TextAreaProps = TextareaHTMLAttributes<HTMLTextAreaElement> & Pick<InputProps, "label" | "error" | "hint">;
+
+export const TextAreaField = forwardRef<HTMLTextAreaElement, TextAreaProps>(function TextAreaField(
+  { label, error, hint, ...textarea },
+  ref,
+) {
+  const id = useId();
+  return (
+    <FieldShell id={id} label={label} error={error} hint={hint}>
+      <div className={`${inputBox} ${error ? inputError : ""} px-3.5`}>
+        <textarea
+          ref={ref}
+          id={id}
+          rows={4}
+          aria-invalid={!!error}
+          aria-describedby={error ? `${id}-error` : undefined}
+          className={`${inputText} resize-y`}
+          {...textarea}
+        />
+      </div>
+    </FieldShell>
+  );
+});
+
+type SelectProps = SelectHTMLAttributes<HTMLSelectElement> & Pick<InputProps, "label" | "error" | "hint">;
+
+export const SelectField = forwardRef<HTMLSelectElement, SelectProps>(function SelectField(
+  { label, error, hint, children, ...select },
+  ref,
+) {
+  const id = useId();
+  return (
+    <FieldShell id={id} label={label} error={error} hint={hint}>
+      <div className={`${inputBox} ${error ? inputError : ""} relative`}>
+        <select
+          ref={ref}
+          id={id}
+          aria-invalid={!!error}
+          aria-describedby={error ? `${id}-error` : undefined}
+          className={`${inputText} appearance-none pr-10 pl-3.5 disabled:opacity-60`}
+          {...select}
+        >
+          {children}
+        </select>
+        <ChevronDown className="pointer-events-none absolute right-3.5 size-4 text-muted" aria-hidden="true" />
       </div>
     </FieldShell>
   );
