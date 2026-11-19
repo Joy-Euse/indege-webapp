@@ -44,7 +44,7 @@ export function Login() {
           </div>
           <Link
             to="/register"
-            className="flex items-center gap-3 rounded-2xl bg-white p-3.5 shadow-sm ring-1 ring-line/60 transition hover:ring-primary"
+            className="flex items-center gap-3 rounded-2xl bg-card p-3.5 shadow-sm ring-1 ring-line/60 transition hover:ring-primary"
           >
             <span className="grid size-10 shrink-0 place-items-center rounded-full bg-secondary-soft text-secondary-dark">
               <UserPlus className="size-5" aria-hidden="true" />

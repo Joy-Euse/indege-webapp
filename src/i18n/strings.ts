@@ -207,6 +207,119 @@ export const strings = {
     en: "The customer pays you directly, by cash or mobile money. INDEGE records the agreed wage but is not responsible for unverified cash payments.",
     rw: "Umukiriya akwishyura ubwe, mu ntoki cyangwa kuri mobile money. INDEGE yandika igihembo mwumvikanye ariko ntiryozwa amafaranga atanzwe mu ntoki atagenzuwe.",
   },
+  // Finishing a job and its payment (all DRAFT)
+  payTitle: { en: "Payment", rw: "Kwishyura" },
+  payCash: { en: "Cash", rw: "Mu ntoki" },
+  payMobileMoney: { en: "Mobile money", rw: "Mobile money" },
+  payNotYet: { en: "Not paid yet", rw: "Ntarishyura" },
+  payAmount: { en: "Wage", rw: "Igihembo" },
+  payPaidBy: { en: "Paid by", rw: "Byishyuwe" },
+  payDoneOn: { en: "Done on", rw: "Byarangiye ku wa" },
+  payStatusUnpaid: { en: "Not paid", rw: "Ntibyishyuwe" },
+  payStatusToConfirm: { en: "To confirm", rw: "Byemeze" },
+  payStatusDisputed: { en: "Not received", rw: "Ntibyagezeho" },
+  payStatusReceived: { en: "Received", rw: "Byakiriwe" },
+  payNotStarted: { en: "You can mark this job done once it has started:", rw: "Uzashobora kwemeza ko akazi karangiye kamaze gutangira:" },
+  payMarkDoneText: {
+    en: "When the work is finished, mark the job done and say how you paid the worker.",
+    rw: "Akazi nikarangira, emeza ko karangiye kandi uvuge uko wishyuye umukozi.",
+  },
+  payMarkDone: { en: "Mark job as done", rw: "Emeza ko akazi karangiye" },
+  payConfirmDone: { en: "Mark done", rw: "Emeza" },
+  payHowDidYouPay: { en: "How did you pay the worker?", rw: "Wishyuye umukozi ute?" },
+  payHowWereYouPaid: { en: "How were you paid?", rw: "Wishyuwe ute?" },
+  payRecord: { en: "Record payment", rw: "Andika ko wishyuye" },
+  payCustomerUnpaid: {
+    en: "This job is done. Record the payment once you've paid the worker.",
+    rw: "Aka kazi karangiye. Andika ko wishyuye umaze kwishyura umukozi.",
+  },
+  payCustomerToConfirm: {
+    en: "Waiting for the worker to confirm they received it.",
+    rw: "Dutegereje ko umukozi yemeza ko yabyakiriye.",
+  },
+  payCustomerDisputed: {
+    en: "The worker says this payment hasn't reached them. Check with them, then record it again once it's sorted.",
+    rw: "Umukozi avuga ko aya mafaranga atamugezeho. Vugana na we, hanyuma wongere wandike bimaze gukemuka.",
+  },
+  payCustomerReceived: { en: "The worker confirmed they received this payment.", rw: "Umukozi yemeje ko yakiriye aya mafaranga." },
+  payWorkerNotDone: {
+    en: "Once the customer pays you, record it here. That also marks the job done.",
+    rw: "Umukiriya namara kukwishyura, byandike hano. Bizanemeza ko akazi karangiye.",
+  },
+  payWorkerUnpaid: {
+    en: "The job is done and waiting for payment. Record it here when you're paid.",
+    rw: "Akazi karangiye, gategereje kwishyurwa. Bwandike hano numara kwishyurwa.",
+  },
+  payWorkerToConfirm: { en: "The customer says they paid you. Did you receive it?", rw: "Umukiriya avuga ko yakwishyuye. Wabyakiriye?" },
+  payWorkerDisputed: {
+    en: "You said this payment hasn't reached you. Talk to the customer, and record it here once you're paid.",
+    rw: "Wavuze ko aya mafaranga atakugezeho. Vugana n'umukiriya, hanyuma ubyandike hano numara kwishyurwa.",
+  },
+  payWorkerReceived: {
+    en: "You confirmed receiving this payment. It counts in your earnings.",
+    rw: "Wemeje ko wakiriye aya mafaranga. Abarirwa mu byo winjije.",
+  },
+  payYesReceived: { en: "Yes, I got it", rw: "Yego, narabibonye" },
+  payNotReceived: { en: "No, not yet", rw: "Oya, ntarabibona" },
+  payIWasPaid: { en: "I've been paid", rw: "Narishyuwe" },
+
+  payStatusAwaitingWorker: { en: "Paid, unconfirmed", rw: "Byishyuwe, bitaremezwa" },
+  payStatusConfirmed: { en: "Confirmed", rw: "Byemejwe" },
+
+  // Payments, on the hiring side (all DRAFT)
+  paymentsIntro: {
+    en: "What you've paid workers for finished jobs, and what's still to pay.",
+    rw: "Ibyo wishyuye abakozi ku kazi karangiye, n'ibisigaye kwishyurwa.",
+  },
+  paidThisMonth: { en: "Paid this month", rw: "Ibyo wishyuye uku kwezi" },
+  paidTotal: { en: "Paid in total", rw: "Ibyo wishyuye byose" },
+  toPay: { en: "Still to pay", rw: "Ibisigaye kwishyurwa" },
+  upcomingWages: { en: "Wages for jobs in progress", rw: "Ibihembo by'akazi gakomeje" },
+  paidByMonth: { en: "Paid by month", rw: "Ibyishyuwe buri kwezi" },
+  paidNoMonths: { en: "Nothing paid in the last six months yet.", rw: "Nta mafaranga yishyuwe mu mezi atandatu ashize." },
+  payToPayTab: { en: "To pay", rw: "Ibyo kwishyura" },
+  payPaidTab: { en: "Paid", rw: "Byishyuwe" },
+  paymentsNoneYet: {
+    en: "No finished jobs yet. Mark a job done once the work is finished, and it shows here.",
+    rw: "Nta kazi karangiye. Emeza ko akazi karangiye kamaze gukorwa, kazagaragara hano.",
+  },
+  paymentsNoneToPay: { en: "Nothing to pay. You're all settled.", rw: "Nta kwishyura gusigaye. Byose byarangiye." },
+  paymentsNonePaid: { en: "No payments recorded yet.", rw: "Nta kwishyura kuranditswe." },
+  jobsToFinish: { en: "jobs to mark done", rw: "akazi ko kwemeza ko karangiye" },
+  jobsToFinishText: {
+    en: "Their start time has passed. Mark them done and record how you paid.",
+    rw: "Igihe cyo gutangira cyarenze. Emeza ko karangiye kandi wandike uko wishyuye.",
+  },
+  paymentsDisputed: { en: "payments not received", rw: "amafaranga atageze ku bakozi" },
+  paymentsDisputedText: {
+    en: "Workers say these didn't reach them. Check with them and record the payment again.",
+    rw: "Abakozi bavuga ko atabagezeho. Vugana na bo wongere wandike ko wishyuye.",
+  },
+
+  // Earnings (all DRAFT)
+  earnIntro: {
+    en: "What you've been paid for finished jobs, as you confirmed it.",
+    rw: "Ibyo wishyuwe ku kazi karangiye, nk'uko wabyemeje.",
+  },
+  earnThisMonth: { en: "Received this month", rw: "Ibyo wakiriye uku kwezi" },
+  earnTotal: { en: "Received in total", rw: "Ibyo wakiriye byose" },
+  earnWaiting: { en: "Waiting for payment", rw: "Bitegereje kwishyurwa" },
+  earnToConfirm: { en: "payments to confirm", rw: "amafaranga yo kwemeza" },
+  earnToConfirmText: {
+    en: "Customers say they paid you. Confirm the ones you received.",
+    rw: "Abakiriya bavuga ko bakwishyuye. Emeza ayo wakiriye.",
+  },
+  earnByMonth: { en: "Received by month", rw: "Ibyakiriwe buri kwezi" },
+  earnNoMonths: { en: "Nothing received in the last six months yet.", rw: "Nta mafaranga yakiriwe mu mezi atandatu ashize." },
+  earnFinishedJobs: { en: "Finished jobs", rw: "Akazi karangiye" },
+  earnWaitingTab: { en: "Waiting", rw: "Bitegereje" },
+  earnReceivedTab: { en: "Received", rw: "Byakiriwe" },
+  earnNoneYet: {
+    en: "No finished jobs yet. Jobs you're hired for show here once they're done.",
+    rw: "Nta kazi karangiye. Akazi wahawe kazagaragara hano kamaze kurangira.",
+  },
+  earnNoneWaiting: { en: "Nothing waiting. You're all paid up.", rw: "Nta bitegereje. Wishyuwe byose." },
+  earnNoneReceived: { en: "No payments confirmed yet.", rw: "Nta mafaranga aremezwa." },
   switchToCustomer: { en: "Switch to hiring", rw: "Jya ku gutanga akazi" },
   switchToWorker: { en: "Switch to worker", rw: "Jya ku mukozi" },
   becomeCustomer: { en: "Also hire workers", rw: "Nanjye nshaka abakozi" },
@@ -244,10 +357,24 @@ export const strings = {
   postJobShort: { en: "New job", rw: "Akazi gashya" },
 
   // Settings (all DRAFT)
-  settingsIntro: { en: "Manage your profile, privacy and security.", rw: "Genzura umwirondoro wawe, ibanga n'umutekano." },
+  settingsIntro: { en: "Manage your profile, privacy, security and theme.", rw: "Genzura umwirondoro wawe, ibanga, umutekano n'imigaragarire." },
   tabProfile: { en: "Profile", rw: "Umwirondoro" },
   tabPrivacy: { en: "Privacy", rw: "Ibanga" },
   tabSecurity: { en: "Security", rw: "Umutekano" },
+  // Appearance (all DRAFT)
+  tabAppearance: { en: "Appearance", rw: "Imigaragarire" },
+  appearance: { en: "Theme", rw: "Insanganyamatsiko" },
+  appearanceIntro: { en: "Choose how INDEGE looks.", rw: "Hitamo uko INDEGE igaragara." },
+  themeLight: { en: "Light", rw: "Urumuri" },
+  themeLightHint: { en: "Light backgrounds", rw: "Inyuma h'umweru" },
+  themeDark: { en: "Dark", rw: "Umwijima" },
+  themeDarkHint: { en: "Easier on the eyes at night", rw: "Byoroheye amaso nijoro" },
+  themeSystem: { en: "Same as device", rw: "Nk'igikoresho" },
+  themeSystemHint: { en: "Follows your phone or computer", rw: "Bikurikiza telefoni cyangwa mudasobwa yawe" },
+  themeDeviceOnly: {
+    en: "Saved on this device only. You can choose differently on each phone or computer.",
+    rw: "Bibikwa kuri iki gikoresho gusa. Ushobora guhitamo ukundi kuri buri telefoni cyangwa mudasobwa.",
+  },
   yourDetails: { en: "Your details", rw: "Amakuru yawe" },
   bio: { en: "About you", rw: "Ibikwerekeyeho" },
   bioHint: { en: "Optional. Up to 300 characters.", rw: "Si ngombwa. Inyuguti zitarenze 300." },
@@ -318,6 +445,62 @@ export const strings = {
   deleteConfirm: { en: "Enter your password to confirm", rw: "Andika ijambobanga ngo wemeze" },
   deleteForever: { en: "Delete my account", rw: "Siba konti yanjye" },
 
+  // Messages (all DRAFT)
+  messageCustomer: { en: "Message the customer", rw: "Andikira umukiriya" },
+  messageWorker: { en: "Message your worker", rw: "Andikira umukozi wawe" },
+  messageApplicant: { en: "Message", rw: "Andika ubutumwa" },
+  noMessagesHiring: {
+    en: "No messages yet. You can message a worker from your job's page once you hire them.",
+    rw: "Nta butumwa buraza. Ushobora kwandikira umukozi uhereye ku rupapuro rw'akazi umaze kumuhitamo.",
+  },
+  noMessagesWorking: {
+    en: "No messages yet. Once a customer hires you, you can message them from the job's page.",
+    rw: "Nta butumwa buraza. Umukiriya namara kuguhitamo, uzamwandikira uhereye ku rupapuro rw'akazi.",
+  },
+  chooseConversation: { en: "Choose a conversation to read it.", rw: "Hitamo ikiganiro ngo ugisome." },
+  you: { en: "You", rw: "Wowe" },
+  olderMessages: { en: "Show older messages", rw: "Erekana ubutumwa bwa kera" },
+  sayHello: { en: "No messages yet. Say hello!", rw: "Nta butumwa buraza. Ramutsa!" },
+  writeMessage: { en: "Write a message", rw: "Andika ubutumwa" },
+  send: { en: "Send", rw: "Ohereza" },
+  chatSafety: {
+    en: "Never share passwords or codes. INDEGE will never ask for them.",
+    rw: "Ntuzigere utanga ijambobanga cyangwa kode. INDEGE ntizigera izigusaba.",
+  },
+  chatClosed: {
+    en: "This conversation is closed because the job went to someone else or was cancelled.",
+    rw: "Iki kiganiro cyafunzwe kuko akazi kahawe undi cyangwa kahagaritswe.",
+  },
+  chatNotAllowed: {
+    en: "This person's settings don't let you start a conversation. You can reply if they write to you.",
+    rw: "Igenamiterere ry'uyu muntu ntirikwemerera gutangira ikiganiro. Ushobora gusubiza nakwandikira.",
+  },
+  chatUnavailable: { en: "This person can't receive messages right now.", rw: "Uyu muntu ntashobora kwakira ubutumwa ubu." },
+
+  // Message settings (all DRAFT)
+  whoCanMessage: { en: "Who can message you", rw: "Ni nde ushobora kukwandikira" },
+  whoCanMessageIntro: {
+    en: "Messages are always about a job. You can reply to anyone who writes to you first.",
+    rw: "Ubutumwa buba buri ku kazi runaka. Ushobora gusubiza umuntu wese wakwandikiye mbere.",
+  },
+  whenHiring: { en: "When you're hiring", rw: "Igihe utanga akazi" },
+  whenWorking: { en: "When you're working", rw: "Igihe ukora akazi" },
+  sidesSeparate: {
+    en: "Each side has its own setting. One never changes the other.",
+    rw: "Buri ruhande rufite igenamiterere ryarwo. Rimwe ntirihindura irindi.",
+  },
+  msgNobody: { en: "Nobody", rw: "Nta muntu" },
+  msgNobodyText: { en: "Nobody can start a conversation", rw: "Nta muntu ushobora gutangira ikiganiro" },
+  msgHiringHired: { en: "Workers I hire", rw: "Abakozi mpitamo" },
+  msgHiringHiredText: { en: "Only the worker you choose for a job", rw: "Umukozi wahisemo ku kazi gusa" },
+  msgHiringApplicants: { en: "Workers who apply", rw: "Abakozi basaba" },
+  msgHiringApplicantsText: { en: "Also workers waiting on your open jobs", rw: "N'abakozi bategereje ku kazi kawe gafunguye" },
+  msgWorkingHired: { en: "Customers who hire me", rw: "Abakiriya bampitamo" },
+  msgWorkingHiredText: { en: "Only customers who choose you for a job", rw: "Abakiriya baguhitamo ku kazi gusa" },
+  msgWorkingApplicants: { en: "Customers I apply to", rw: "Abakiriya nsaba akazi" },
+  msgWorkingApplicantsText: { en: "Also customers whose open jobs you applied for", rw: "N'abakiriya wasabye akazi kabo gafunguye" },
+  messageSettingsSaved: { en: "Your message settings have been saved.", rw: "Igenamiterere ry'ubutumwa ryabitswe." },
+
   // Legal placeholder (DRAFT)
   legalSoon: { en: "This page will be published before launch.", rw: "Iyi paji izatangazwa mbere yo gutangira." },
 
@@ -363,6 +546,23 @@ export const strings = {
     en: "You have 20 applications waiting. Withdraw one or wait for answers before applying again.",
     rw: "Ufite ubusabe 20 butegereje. Kuraho bumwe cyangwa utegereze ibisubizo mbere yo kongera gusaba.",
   },
+  CONVERSATION_NOT_FOUND: { en: "We couldn't find this conversation.", rw: "Ntitwabonye iki kiganiro." },
+  CONVERSATION_CLOSED: { en: "This conversation is closed.", rw: "Iki kiganiro cyafunzwe." },
+  MESSAGES_NOT_ALLOWED: {
+    en: "This person's settings don't let you message them.",
+    rw: "Igenamiterere ry'uyu muntu ntirikwemerera kumwandikira.",
+  },
+  RECIPIENT_UNAVAILABLE: { en: "This person can't receive messages right now.", rw: "Uyu muntu ntashobora kwakira ubutumwa ubu." },
+  JOB_NOT_STARTED: { en: "This job hasn't started yet.", rw: "Aka kazi ntikaratangira." },
+  JOB_NOT_ACTIVE: {
+    en: "Only a job with a hired worker can be marked done.",
+    rw: "Akazi gafite umukozi wagahawe ni ko konyine gashobora kwemezwa ko karangiye.",
+  },
+  JOB_NOT_COMPLETED: { en: "Mark this job done first.", rw: "Banza wemeze ko aka kazi karangiye." },
+  PAYMENT_CONFIRMED: { en: "The worker has already confirmed this payment.", rw: "Umukozi yamaze kwemeza aya mafaranga." },
+  PAYMENT_NOT_RECORDED: { en: "The customer hasn't recorded a payment yet.", rw: "Umukiriya ntarandika ko yishyuye." },
+  NOT_HIRED: { en: "Only the hired worker can do this.", rw: "Umukozi wahawe akazi ni we wenyine ushobora kubikora." },
+  TRY_AGAIN: { en: "This job just changed. Please try again.", rw: "Aka kazi kahindutse. Ongera ugerageze." },
   networkError: { en: "We can't reach INDEGE. Check your connection and try again.", rw: "Ntitubashije kugera kuri INDEGE. Reba interineti wongere ugerageze." },
   genericError: { en: "Something went wrong. Please try again.", rw: "Habaye ikibazo. Ongera ugerageze." },
 } as const;

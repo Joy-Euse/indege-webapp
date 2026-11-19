@@ -20,6 +20,9 @@ export interface WorkerJob extends Omit<Job, "landmark"> {
   landmark?: string;
   customer?: PublicProfile;
   myApplication: MyApplication | null;
+  /** Only on a single job. */
+  conversationId?: string | null;
+  canMessage?: boolean;
 }
 
 export interface WorkerApplication extends MyApplication {
@@ -41,6 +44,8 @@ export interface Applicant {
   message: string | null;
   createdAt: string;
   worker: PublicProfile;
+  conversationId: string | null;
+  canMessage: boolean;
 }
 
 export type ApplicationFilter = "all" | "pending" | "hired" | "closed";

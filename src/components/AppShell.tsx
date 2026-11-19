@@ -15,6 +15,7 @@ import { Link, Outlet, useLocation } from "react-router-dom";
 import { useAuth } from "../auth/AuthContext";
 import type { StringKey } from "../i18n/strings";
 import { Loading } from "./JobParts";
+import { useSide, useUnreadCount } from "../lib/messages";
 import { JobSearchBox } from "./JobSearchBox";
 import { Logo, LogoMark } from "./Logo";
 import { ProfileMenu, SideBadge } from "./ProfileMenu";
@@ -30,6 +31,8 @@ interface NavItem {
 
 const startsWith = (prefix: string) => (path: string) => path === prefix || path.startsWith(`${prefix}/`);
 
+const MESSAGES_ITEM: NavItem = { icon: MessageCircle, label: "navMessages", to: "/messages", isActive: startsWith("/messages") };
+
 const HIRING_NAV: NavItem[] = [
   { icon: House, label: "navHome", to: "/customer", isActive: (path) => path === "/customer" },
   {
@@ -39,15 +42,16 @@ const HIRING_NAV: NavItem[] = [
     isActive: (path) => startsWith("/customer/jobs")(path) && path !== "/customer/jobs/new",
   },
   { icon: CirclePlus, label: "postJob", to: "/customer/jobs/new", isActive: (path) => path === "/customer/jobs/new" },
-  { icon: MessageCircle, label: "navMessages" },
-  { icon: Wallet, label: "navPayments" },
+  MESSAGES_ITEM,
+  { icon: Wallet, label: "navPayments", to: "/customer/payments", isActive: startsWith("/customer/payments") },
 ];
 
 const WORKER_NAV: NavItem[] = [
   { icon: House, label: "navHome", to: "/worker", isActive: (path) => path === "/worker" },
   { icon: Search, label: "navFindWork", to: "/worker/jobs", isActive: startsWith("/worker/jobs") },
   { icon: ClipboardList, label: "navApplications", to: "/worker/applications", isActive: startsWith("/worker/applications") },
-  { icon: Banknote, label: "navEarnings" },
+  MESSAGES_ITEM,
+  { icon: Banknote, label: "navEarnings", to: "/worker/earnings", isActive: startsWith("/worker/earnings") },
 ];
 
 const SETTINGS_ITEM: NavItem = { icon: Settings, label: "settings", to: "/settings", isActive: startsWith("/settings") };
@@ -59,21 +63,23 @@ const SETTINGS_ITEM: NavItem = { icon: Settings, label: "settings", to: "/settin
 export function AppShell() {
   const { state } = useAuth();
   const { pathname } = useLocation();
+  const unread = useUnreadCount(useSide(), state.status === "authenticated");
   if (state.status !== "authenticated") return null;
 
   const isWorker = state.user.activeRole === "WORKER";
   const items = isWorker ? WORKER_NAV : HIRING_NAV;
+  const badges: Partial<Record<StringKey, number>> = { navMessages: unread.data ?? 0 };
 
   return (
     <div className="min-h-dvh">
       <a
         href="#main"
-        className="sr-only z-50 rounded-lg bg-white px-4 py-2 font-bold focus:not-sr-only focus:fixed focus:left-3 focus:top-3"
+        className="sr-only z-50 rounded-lg bg-card px-4 py-2 font-bold focus:not-sr-only focus:fixed focus:left-3 focus:top-3"
       >
         Skip to content
       </a>
 
-      <aside className="fixed inset-y-0 left-0 z-30 hidden w-20 flex-col border-r border-line bg-white md:flex xl:w-64">
+      <aside className="fixed inset-y-0 left-0 z-30 hidden w-20 flex-col border-r border-line bg-card md:flex xl:w-64">
         <Link to={isWorker ? "/worker" : "/customer"} className="flex h-16 shrink-0 items-center justify-center xl:justify-start xl:px-6">
           <span className="xl:hidden">
             <LogoMark size={36} />
@@ -91,7 +97,7 @@ export function AppShell() {
         <nav aria-label={plain("mainNav")} className="flex-1 overflow-y-auto px-3 py-2">
           <ul className="space-y-1">
             {items.map((item) => (
-              <SidebarLink key={item.label} item={item} pathname={pathname} />
+              <SidebarLink key={item.label} item={item} pathname={pathname} badge={badges[item.label]} />
             ))}
           </ul>
           <ul className="mt-4 space-y-1 border-t border-line pt-4">
@@ -115,11 +121,11 @@ export function AppShell() {
               {isWorker && (
                 <Link
                   to="/worker/jobs"
-                  className="hidden min-h-11 items-center gap-2 rounded-xl bg-secondary px-4 text-sm font-extrabold text-ink shadow-sm hover:bg-[#e58a1f] md:flex"
+                  className="hidden min-h-11 items-center gap-2 rounded-xl bg-secondary px-4 text-sm font-extrabold text-on-secondary shadow-sm hover:bg-[#e58a1f] md:flex"
                 >
                   <Search className="size-4.5" aria-hidden="true" />
                   <span>
-                    <Dual k="navFindWork" rwClassName="font-semibold text-ink/70" />
+                    <Dual k="navFindWork" rwClassName="font-semibold text-on-secondary/70" />
                   </span>
                 </Link>
               )}
@@ -129,17 +135,17 @@ export function AppShell() {
                     to="/customer/jobs"
                     state={{ focusSearch: true }}
                     aria-label={plain("searchJobs")}
-                    className="grid size-11 place-items-center rounded-full text-muted hover:bg-white hover:text-ink md:hidden"
+                    className="grid size-11 place-items-center rounded-full text-muted hover:bg-card hover:text-ink md:hidden"
                   >
                     <Search className="size-5" aria-hidden="true" />
                   </Link>
                   <Link
                     to="/customer/jobs/new"
-                    className="hidden min-h-11 items-center gap-2 rounded-xl bg-secondary px-4 text-sm font-extrabold text-ink shadow-sm hover:bg-[#e58a1f] md:flex"
+                    className="hidden min-h-11 items-center gap-2 rounded-xl bg-secondary px-4 text-sm font-extrabold text-on-secondary shadow-sm hover:bg-[#e58a1f] md:flex"
                   >
                     <CirclePlus className="size-4.5" aria-hidden="true" />
                     <span>
-                      <Dual k="postJob" rwClassName="font-semibold text-ink/70" />
+                      <Dual k="postJob" rwClassName="font-semibold text-on-secondary/70" />
                     </span>
                   </Link>
                 </>
@@ -158,12 +164,29 @@ export function AppShell() {
         </main>
       </div>
 
-      <BottomNav items={[...items.filter((item) => item.to), SETTINGS_ITEM]} pathname={pathname} />
+      <BottomNav items={bottomItems(items)} pathname={pathname} badges={badges} />
     </div>
   );
 }
 
-function SidebarLink({ item, pathname }: { item: NavItem; pathname: string }) {
+/** At most five tabs fit a phone. Settings is also in the top bar's account menu, so it gives way first. */
+function bottomItems(items: NavItem[]): NavItem[] {
+  const built = items.filter((item) => item.to);
+  return built.length < 5 ? [...built, SETTINGS_ITEM] : built;
+}
+
+/** A count on a nav item, such as unread conversations. Nothing when it is zero. */
+function NavBadge({ count, className = "" }: { count: number | undefined; className?: string }) {
+  if (!count) return null;
+  return (
+    <span className={`grid min-w-5 place-items-center rounded-full bg-secondary px-1.5 text-[11px] font-extrabold leading-5 text-on-secondary tabular-nums ${className}`}>
+      {count > 99 ? "99+" : count}
+      <span className="sr-only"> unread</span>
+    </span>
+  );
+}
+
+function SidebarLink({ item, pathname, badge }: { item: NavItem; pathname: string; badge?: number }) {
   const { icon: Icon, label, to } = item;
   const active = item.isActive?.(pathname) ?? false;
   const base =
@@ -171,8 +194,12 @@ function SidebarLink({ item, pathname }: { item: NavItem; pathname: string }) {
 
   const content = (
     <>
-      <Icon className="size-5 shrink-0" aria-hidden="true" />
+      <span className="relative">
+        <Icon className="size-5 shrink-0" aria-hidden="true" />
+        <NavBadge count={badge} className="absolute -top-2 -right-2.5 xl:hidden" />
+      </span>
       <Stacked k={label} className="hidden min-w-0 leading-tight xl:block" />
+      <NavBadge count={badge} className="ml-auto hidden xl:grid" />
       {!to && (
         <span className="ml-auto hidden rounded-full bg-field px-2 py-0.5 text-[10px] font-bold text-muted xl:inline">
           <Dual k="soon" rwClassName="font-medium" />
@@ -181,10 +208,10 @@ function SidebarLink({ item, pathname }: { item: NavItem; pathname: string }) {
       {/* On the icon rail, the label shows as a tooltip on hover and focus. */}
       <span
         role="tooltip"
-        className="pointer-events-none absolute left-full z-40 ml-3 hidden whitespace-nowrap rounded-lg bg-ink px-2.5 py-1.5 text-xs font-semibold text-white shadow-lg group-hover:block group-focus-visible:block xl:hidden!"
+        className="pointer-events-none absolute left-full z-40 ml-3 hidden whitespace-nowrap rounded-lg bg-ink px-2.5 py-1.5 text-xs font-semibold text-surface shadow-lg group-hover:block group-focus-visible:block xl:hidden!"
       >
-        <Dual k={label} rwClassName="font-normal text-white/75" />
-        {!to && <span className="ml-1.5 text-white/75">· <Dual k="soon" rwClassName="" /></span>}
+        <Dual k={label} rwClassName="font-normal text-surface/75" />
+        {!to && <span className="ml-1.5 text-surface/75">· <Dual k="soon" rwClassName="" /></span>}
       </span>
     </>
   );
@@ -209,11 +236,11 @@ function SidebarLink({ item, pathname }: { item: NavItem; pathname: string }) {
   );
 }
 
-function BottomNav({ items, pathname }: { items: NavItem[]; pathname: string }) {
+function BottomNav({ items, pathname, badges }: { items: NavItem[]; pathname: string; badges: Partial<Record<StringKey, number>> }) {
   return (
     <nav
       aria-label={plain("mainNav")}
-      className="fixed inset-x-0 bottom-0 z-30 border-t border-line bg-white pb-[env(safe-area-inset-bottom)] md:hidden"
+      className="fixed inset-x-0 bottom-0 z-30 border-t border-line bg-card pb-[env(safe-area-inset-bottom)] md:hidden"
     >
       <ul className="mx-auto grid max-w-lg" style={{ gridTemplateColumns: `repeat(${items.length}, minmax(0, 1fr))` }}>
         {items.map(({ icon: Icon, label, to, isActive }) => {
@@ -225,7 +252,10 @@ function BottomNav({ items, pathname }: { items: NavItem[]; pathname: string }) 
                 aria-current={active ? "page" : undefined}
                 className={`flex min-h-16 flex-col items-center justify-center gap-0.5 px-1 text-center text-[11px] font-bold ${active ? "text-primary" : "text-muted hover:text-ink"}`}
               >
-                <Icon className="size-5" aria-hidden="true" />
+                <span className="relative">
+                  <Icon className="size-5" aria-hidden="true" />
+                  <NavBadge count={badges[label]} className="absolute -top-2 -right-3" />
+                </span>
                 <Stacked k={label} className="leading-tight" />
               </Link>
             </li>

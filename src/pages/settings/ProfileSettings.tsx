@@ -238,7 +238,7 @@ function EmailCard({ profile }: { profile: OwnProfile }) {
                 type="button"
                 onClick={() => request.mutate(profile.pendingEmail!)}
                 disabled={request.isPending}
-                className="min-h-11 rounded-xl px-4 text-sm font-bold text-primary hover:bg-white disabled:opacity-60"
+                className="min-h-11 rounded-xl px-4 text-sm font-bold text-primary hover:bg-card disabled:opacity-60"
               >
                 <Dual k="resend" rwClassName="font-medium text-primary/70" />
               </button>

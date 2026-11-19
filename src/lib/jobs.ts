@@ -26,6 +26,47 @@ export interface Job {
   createdAt: string;
   /** Workers waiting for an answer. Only in the customer's job lists. */
   pendingApplications?: number;
+  /** The rest are set once a job is done. Workers only get them for jobs they were hired for. */
+  completedAt?: string | null;
+  paymentMethod?: PaymentMethod | null;
+  paidAt?: string | null;
+  paymentConfirmedAt?: string | null;
+  paymentDisputedAt?: string | null;
+}
+
+export type PaymentMethod = "CASH" | "MOBILE_MONEY";
+export const PAYMENT_METHODS: readonly PaymentMethod[] = ["MOBILE_MONEY", "CASH"];
+export const PAYMENT_METHOD_LABELS: Record<PaymentMethod, StringKey> = {
+  CASH: "payCash",
+  MOBILE_MONEY: "payMobileMoney",
+};
+
+/**
+ * Where a finished job's pay stands. Only the worker's confirmation makes it received, because
+ * INDEGE does not handle the money.
+ */
+export type PaymentStatus = "UNPAID" | "TO_CONFIRM" | "DISPUTED" | "RECEIVED";
+
+export const PAYMENT_STATUS_LABELS: Record<PaymentStatus, StringKey> = {
+  UNPAID: "payStatusUnpaid",
+  TO_CONFIRM: "payStatusToConfirm",
+  DISPUTED: "payStatusDisputed",
+  RECEIVED: "payStatusReceived",
+};
+
+type PaymentFields = Pick<Job, "status" | "paidAt" | "paymentConfirmedAt" | "paymentDisputedAt">;
+
+/** Null for a job that is not done. */
+export function paymentStatus(job: PaymentFields): PaymentStatus | null {
+  if (job.status !== "COMPLETED") return null;
+  if (job.paymentConfirmedAt) return "RECEIVED";
+  if (job.paymentDisputedAt) return "DISPUTED";
+  return job.paidAt ? "TO_CONFIRM" : "UNPAID";
+}
+
+/** A hired job can be marked done, or its pay recorded, once its start time has passed. */
+export function canFinish(job: Pick<Job, "status" | "startsAt">, now = new Date()): boolean {
+  return (job.status === "ASSIGNED" || job.status === "IN_PROGRESS") && new Date(job.startsAt) <= now;
 }
 
 /**
@@ -111,4 +152,17 @@ export function toLocalInput(value: string | Date): string {
 /** An open job whose start time has gone by with nobody hired needs a new date or cancelling. */
 export function hasMissedStart(job: Pick<Job, "status" | "startsAt">, now = new Date()): boolean {
   return job.status === "OPEN" && new Date(job.startsAt) <= now;
+}
+
+/** For a payment date, such as "19 Nov 2026". */
+export function formatDate(value: string | Date): string {
+  return new Intl.DateTimeFormat("en-GB", { day: "numeric", month: "short", year: "numeric" }).format(new Date(value));
+}
+
+/** "Nov" for "2026-11". Read as a calendar month, whatever the device's time zone. */
+export function formatMonthKey(month: string, style: "short" | "long" = "short"): string {
+  const [year, index] = month.split("-").map(Number);
+  return new Intl.DateTimeFormat("en-GB", { month: style, year: style === "long" ? "numeric" : undefined, timeZone: "UTC" }).format(
+    new Date(Date.UTC(year, index - 1, 1)),
+  );
 }

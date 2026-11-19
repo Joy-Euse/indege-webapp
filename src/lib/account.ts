@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useAuth } from "../auth/AuthContext";
 import type { StringKey } from "../i18n/strings";
 import { api, type Role } from "./api";
+import type { MessagePermission } from "./messages";
 import { retryServerErrors } from "./useJobs";
 
 export type Visibility = "PRIVATE" | "CONNECTIONS" | "PUBLIC";
@@ -20,6 +21,8 @@ export interface OwnProfile {
   phoneVisibility: Visibility;
   emailVisibility: Visibility;
   locationVisibility: Visibility;
+  hiringMessagesFrom: MessagePermission;
+  workingMessagesFrom: MessagePermission;
   memberSince: string;
 }
 

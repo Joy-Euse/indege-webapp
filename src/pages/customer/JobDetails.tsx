@@ -12,6 +12,7 @@ import {
   PaymentNotice,
   StatusBadge,
 } from "../../components/JobParts";
+import { CustomerPaymentPanel } from "../../components/PaymentParts";
 import { Dual, Stacked } from "../../components/Text";
 import { Applicants } from "./Applicants";
 import type { StringKey } from "../../i18n/strings";
@@ -54,7 +55,7 @@ export function JobDetails() {
 
           <div className="grid gap-4 lg:grid-cols-[minmax(0,3fr)_minmax(0,2fr)] lg:items-start lg:gap-6">
             <div className="space-y-4">
-              <div className="rounded-2xl bg-white p-4 shadow-sm ring-1 ring-line/60 lg:p-6">
+              <div className="rounded-2xl bg-card p-4 shadow-sm ring-1 ring-line/60 lg:p-6">
                 <div className="mb-3 flex items-center gap-3 border-b border-line pb-3">
                   <CategoryIcon category={job.data.category} />
                   <h1 className="min-w-0 flex-1 text-lg font-extrabold">
@@ -70,6 +71,7 @@ export function JobDetails() {
             </div>
 
             <div className="space-y-4 lg:sticky lg:top-24">
+              <CustomerPaymentPanel job={job.data} />
               <Applicants job={job.data} />
 
               {job.data.status === "OPEN" && !confirming && (
@@ -100,7 +102,7 @@ export function JobDetails() {
                       type="button"
                       onClick={() => setConfirming(false)}
                       disabled={cancel.isPending}
-                      className="min-h-12 rounded-xl bg-white text-sm font-bold ring-1 ring-line disabled:opacity-60"
+                      className="min-h-12 rounded-xl bg-card text-sm font-bold ring-1 ring-line disabled:opacity-60"
                     >
                       <Stacked k="keepJob" className="leading-tight" />
                     </button>
@@ -108,7 +110,7 @@ export function JobDetails() {
                       type="button"
                       onClick={() => cancel.mutate()}
                       disabled={cancel.isPending}
-                      className="min-h-12 rounded-xl bg-danger text-sm font-bold text-white disabled:opacity-60"
+                      className="min-h-12 rounded-xl bg-danger text-sm font-bold text-on-fill disabled:opacity-60"
                     >
                       <Stacked k="confirmCancel" className="leading-tight" />
                     </button>

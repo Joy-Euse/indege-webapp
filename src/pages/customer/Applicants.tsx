@@ -2,6 +2,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { UserCheck, Users } from "lucide-react";
 import { useState } from "react";
 import { ErrorBanner, SuccessBanner } from "../../components/Form";
+import { MessageButton } from "../../components/MessageButton";
 import { LoadError, Loading } from "../../components/JobParts";
 import { Dual, Stacked } from "../../components/Text";
 import { ApplicationBadge, PersonCard } from "../../components/WorkParts";
@@ -32,7 +33,7 @@ export function Applicants({ job }: { job: Job }) {
   const shown = hired ? [hired] : list.filter((applicant) => applicant.status === "PENDING");
 
   return (
-    <section aria-labelledby="applications" className="rounded-2xl bg-white p-4 shadow-sm ring-1 ring-line/60 lg:p-6">
+    <section aria-labelledby="applications" className="rounded-2xl bg-card p-4 shadow-sm ring-1 ring-line/60 lg:p-6">
       <h2 id="applications" className="flex items-center gap-2 font-extrabold">
         {hired ? <UserCheck className="size-5 text-primary" aria-hidden="true" /> : <Users className="size-5 text-primary" aria-hidden="true" />}
         <span className="flex-1">
@@ -55,6 +56,7 @@ export function Applicants({ job }: { job: Job }) {
           {shown.map((applicant) => (
             <li key={applicant.id} className="py-4 first:pt-1 last:pb-0">
               <ApplicantRow
+                jobId={job.id}
                 applicant={applicant}
                 canHire={job.status === "OPEN" && applicant.status === "PENDING"}
                 confirming={confirmingId === applicant.id}
@@ -72,6 +74,7 @@ export function Applicants({ job }: { job: Job }) {
 }
 
 interface ApplicantRowProps {
+  jobId: string;
   applicant: Applicant;
   canHire: boolean;
   confirming: boolean;
@@ -81,7 +84,7 @@ interface ApplicantRowProps {
   onConfirm: () => void;
 }
 
-function ApplicantRow({ applicant, canHire, confirming, busy, onAsk, onCancel, onConfirm }: ApplicantRowProps) {
+function ApplicantRow({ jobId, applicant, canHire, confirming, busy, onAsk, onCancel, onConfirm }: ApplicantRowProps) {
   const hired = applicant.status === "HIRED";
   return (
     <div className="space-y-3">
@@ -96,14 +99,22 @@ function ApplicantRow({ applicant, canHire, confirming, busy, onAsk, onCancel, o
         <blockquote className="whitespace-pre-line break-words rounded-xl bg-surface p-3 text-sm">“{applicant.message}”</blockquote>
       )}
 
+      <MessageButton
+        jobId={jobId}
+        workerId={applicant.worker.id}
+        conversationId={applicant.conversationId}
+        canMessage={applicant.canMessage}
+        label={hired ? "messageWorker" : "messageApplicant"}
+      />
+
       {canHire && !confirming && (
         <button
           type="button"
           onClick={onAsk}
-          className="flex min-h-11 w-full items-center justify-center gap-1.5 rounded-xl bg-primary text-sm font-bold text-white hover:bg-primary/90"
+          className="flex min-h-11 w-full items-center justify-center gap-1.5 rounded-xl bg-primary text-sm font-bold text-on-fill hover:bg-primary/90"
         >
           <UserCheck className="size-4" aria-hidden="true" />
-          <Dual k="hire" rwClassName="font-medium text-white/75" />
+          <Dual k="hire" rwClassName="font-medium text-on-fill/75" />
         </button>
       )}
 
@@ -115,7 +126,7 @@ function ApplicantRow({ applicant, canHire, confirming, busy, onAsk, onCancel, o
               type="button"
               onClick={onCancel}
               disabled={busy}
-              className="min-h-12 rounded-xl bg-white text-sm font-bold ring-1 ring-line disabled:opacity-60"
+              className="min-h-12 rounded-xl bg-card text-sm font-bold ring-1 ring-line disabled:opacity-60"
             >
               <Stacked k="cancel" className="leading-tight" />
             </button>
@@ -123,7 +134,7 @@ function ApplicantRow({ applicant, canHire, confirming, busy, onAsk, onCancel, o
               type="button"
               onClick={onConfirm}
               disabled={busy}
-              className="min-h-12 rounded-xl bg-primary text-sm font-bold text-white disabled:opacity-60"
+              className="min-h-12 rounded-xl bg-primary text-sm font-bold text-on-fill disabled:opacity-60"
             >
               <Stacked k="confirmHire" className="leading-tight" />
             </button>

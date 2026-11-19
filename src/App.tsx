@@ -18,10 +18,22 @@ const PostJob = lazy(() => import("./pages/customer/PostJob").then((m) => ({ def
 const EditJob = lazy(() => import("./pages/customer/EditJob").then((m) => ({ default: m.EditJob })));
 const FindWork = lazy(() => import("./pages/worker/FindWork").then((m) => ({ default: m.FindWork })));
 const WorkJobDetails = lazy(() => import("./pages/worker/WorkJobDetails").then((m) => ({ default: m.WorkJobDetails })));
+const Payments = lazy(() => import("./pages/customer/Payments").then((m) => ({ default: m.Payments })));
+const Earnings = lazy(() => import("./pages/worker/Earnings").then((m) => ({ default: m.Earnings })));
 const MyApplications = lazy(() => import("./pages/worker/MyApplications").then((m) => ({ default: m.MyApplications })));
+const Messages = lazy(() => import("./pages/messages/Messages").then((m) => ({ default: m.Messages })));
+const NoConversationChosen = lazy(() =>
+  import("./pages/messages/Messages").then((m) => ({ default: m.NoConversationChosen })),
+);
+const ConversationView = lazy(() =>
+  import("./pages/messages/ConversationView").then((m) => ({ default: m.ConversationView })),
+);
 const SettingsLayout = lazy(() => import("./pages/settings/SettingsLayout").then((m) => ({ default: m.SettingsLayout })));
 const ProfileSettings = lazy(() => import("./pages/settings/ProfileSettings").then((m) => ({ default: m.ProfileSettings })));
 const PrivacySettings = lazy(() => import("./pages/settings/PrivacySettings").then((m) => ({ default: m.PrivacySettings })));
+const AppearanceSettings = lazy(() =>
+  import("./pages/settings/AppearanceSettings").then((m) => ({ default: m.AppearanceSettings })),
+);
 const SecuritySettings = lazy(() => import("./pages/settings/SecuritySettings").then((m) => ({ default: m.SecuritySettings })));
 
 export function App() {
@@ -45,18 +57,25 @@ export function App() {
             <Route path="jobs/new" element={<PostJob />} />
             <Route path="jobs/:id" element={<JobDetails />} />
             <Route path="jobs/:id/edit" element={<EditJob />} />
+            <Route path="payments" element={<Payments />} />
           </Route>
           <Route path="/worker" element={<RequireActiveRole role="WORKER" />}>
             <Route index element={<WorkerHome />} />
             <Route path="jobs" element={<FindWork />} />
             <Route path="jobs/:id" element={<WorkJobDetails />} />
             <Route path="applications" element={<MyApplications />} />
+            <Route path="earnings" element={<Earnings />} />
+          </Route>
+          <Route path="/messages" element={<Messages />}>
+            <Route index element={<NoConversationChosen />} />
+            <Route path=":id" element={<ConversationView />} />
           </Route>
           <Route path="/settings" element={<SettingsLayout />}>
             <Route index element={<Navigate to="profile" replace />} />
             <Route path="profile" element={<ProfileSettings />} />
             <Route path="privacy" element={<PrivacySettings />} />
             <Route path="security" element={<SecuritySettings />} />
+            <Route path="appearance" element={<AppearanceSettings />} />
           </Route>
         </Route>
       </Route>

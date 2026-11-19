@@ -87,7 +87,7 @@ export function JobForm({ initial, submitLabel, busy, error, onSubmit }: JobForm
               return (
                 <label
                   key={category}
-                  className="flex cursor-pointer items-center gap-2.5 rounded-xl bg-white p-3 ring-1 ring-line transition has-checked:bg-primary-soft has-checked:ring-2 has-checked:ring-primary has-focus-visible:outline-3 has-focus-visible:outline-offset-2 has-focus-visible:outline-secondary"
+                  className="flex cursor-pointer items-center gap-2.5 rounded-xl bg-card p-3 ring-1 ring-line transition has-checked:bg-primary-soft has-checked:ring-2 has-checked:ring-primary has-focus-visible:outline-3 has-focus-visible:outline-offset-2 has-focus-visible:outline-secondary"
                 >
                   <input type="radio" value={category} className="sr-only" {...register("category")} />
                   <Icon className="size-5 shrink-0 text-primary" aria-hidden="true" />
@@ -115,7 +115,7 @@ export function JobForm({ initial, submitLabel, busy, error, onSubmit }: JobForm
             <button
               type="button"
               onClick={() => goTo(1)}
-              className="flex w-full items-center gap-3 rounded-xl bg-white p-3 text-left text-sm font-bold ring-1 ring-line hover:ring-primary/40"
+              className="flex w-full items-center gap-3 rounded-xl bg-card p-3 text-left text-sm font-bold ring-1 ring-line hover:ring-primary/40"
             >
               <CategoryIcon category={values.category} />
               <span className="min-w-0 flex-1">
@@ -197,7 +197,7 @@ export function JobForm({ initial, submitLabel, busy, error, onSubmit }: JobForm
 
       {step === 3 && (
         <>
-          <div className="rounded-2xl bg-white p-4 shadow-sm ring-1 ring-line/60">
+          <div className="rounded-2xl bg-card p-4 shadow-sm ring-1 ring-line/60">
             <div className="mb-3 flex items-center gap-3 border-b border-line pb-3">
               <CategoryIcon category={values.category} />
               <h3 className="font-bold">

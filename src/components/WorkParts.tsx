@@ -27,6 +27,7 @@ export function ApplicationBadge({ status }: { status: ApplicationStatus }) {
  */
 export function workerBadge(job: { status: Parameters<typeof StatusBadge>[0]["status"]; myApplication?: MyApplication | null }) {
   if (job.status === "CANCELLED") return <StatusBadge status="CANCELLED" />;
+  if (job.status === "COMPLETED" && job.myApplication?.status === "HIRED") return <StatusBadge status="COMPLETED" />;
   return job.myApplication ? <ApplicationBadge status={job.myApplication.status} /> : null;
 }
 
@@ -86,7 +87,7 @@ export function PersonCard({ person, expectContact = false }: { person: PublicPr
 
 export function EmptyBox({ k }: { k: StringKey }) {
   return (
-    <div className="rounded-2xl bg-white p-6 text-sm shadow-sm ring-1 ring-line/60">
+    <div className="rounded-2xl bg-card p-6 text-sm shadow-sm ring-1 ring-line/60">
       <Stacked k={k} className="text-muted" />
     </div>
   );

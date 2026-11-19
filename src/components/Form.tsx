@@ -14,9 +14,9 @@ import { ApiError } from "../lib/api";
 import { Dual, plain, Stacked } from "./Text";
 
 const inputBox =
-  "flex items-center overflow-hidden rounded-xl bg-field ring-1 ring-transparent transition focus-within:bg-white focus-within:ring-2 focus-within:ring-primary";
+  "flex items-center overflow-hidden rounded-xl bg-field ring-1 ring-transparent transition focus-within:bg-card focus-within:ring-2 focus-within:ring-primary";
 const inputError = "ring-2! ring-danger!";
-const inputText = "min-w-0 flex-1 bg-transparent py-3.5 text-base outline-none placeholder:text-gray-400";
+const inputText = "min-w-0 flex-1 bg-transparent py-3.5 text-base outline-none placeholder:text-muted/70";
 
 interface FieldShellProps {
   id: string;
@@ -250,10 +250,10 @@ export function SubmitButton({ label, busy }: { label: StringKey; busy: boolean 
       type="submit"
       disabled={busy}
       aria-busy={busy}
-      className="flex min-h-13 w-full items-center justify-center gap-2 rounded-xl bg-secondary px-4 font-display text-base font-extrabold text-ink shadow-sm transition hover:bg-[#e58a1f] disabled:opacity-60"
+      className="flex min-h-13 w-full items-center justify-center gap-2 rounded-xl bg-secondary px-4 font-display text-base font-extrabold text-on-secondary shadow-sm transition hover:bg-[#e58a1f] disabled:opacity-60"
     >
       {busy ? (
-        <span className="size-5 animate-spin rounded-full border-[3px] border-ink/25 border-t-ink" role="status" aria-label="Loading" />
+        <span className="size-5 animate-spin rounded-full border-[3px] border-on-secondary/25 border-t-on-secondary" role="status" aria-label="Loading" />
       ) : (
         <>
           <span>

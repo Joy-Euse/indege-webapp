@@ -44,7 +44,7 @@ export function WorkerHome() {
 
       <Link
         to="/worker/jobs"
-        className="flex items-center gap-3 rounded-2xl bg-secondary p-4 text-ink shadow-sm transition hover:bg-[#e58a1f] md:hidden"
+        className="flex items-center gap-3 rounded-2xl bg-secondary p-4 text-on-secondary shadow-sm transition hover:bg-[#e58a1f] md:hidden"
       >
         <Search className="size-8 shrink-0" aria-hidden="true" />
         <span className="min-w-0 flex-1">
@@ -63,7 +63,7 @@ export function WorkerHome() {
       {profileIncomplete && (
         <Link
           to="/settings/profile"
-          className="flex items-center gap-3 rounded-2xl bg-white p-4 shadow-sm ring-1 ring-secondary/40 transition hover:ring-secondary"
+          className="flex items-center gap-3 rounded-2xl bg-card p-4 shadow-sm ring-1 ring-secondary/40 transition hover:ring-secondary"
         >
           <span className="grid size-11 shrink-0 place-items-center rounded-xl bg-secondary-soft text-secondary-dark">
             <UserRound className="size-5" aria-hidden="true" />
@@ -91,6 +91,7 @@ export function WorkerHome() {
               label="statUpcomingPay"
               value={summary.data ? formatRwf(summary.data.upcomingWagesRwf) : undefined}
               tone={TILE_TONES[0]}
+              to="/worker/earnings"
             />
           </ul>
         )}
@@ -122,7 +123,7 @@ export function WorkerHome() {
                 <li key={job.myApplication.id}>
                   <Link
                     to={`/worker/jobs/${job.id}`}
-                    className="flex items-center gap-3 rounded-xl bg-white p-3 shadow-sm ring-1 ring-line/60 transition hover:ring-primary/40"
+                    className="flex items-center gap-3 rounded-xl bg-card p-3 shadow-sm ring-1 ring-line/60 transition hover:ring-primary/40"
                   >
                     <span className="min-w-0 flex-1">
                       <span className="block truncate text-sm font-bold">{job.description}</span>

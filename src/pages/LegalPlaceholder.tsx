@@ -10,7 +10,7 @@ export function LegalPlaceholder({ title }: { title: StringKey }) {
       <h1 className="mt-8 text-2xl font-extrabold">
         <Dual k={title} rwClassName="font-medium text-muted" />
       </h1>
-      <div className="mt-4 rounded-2xl bg-white p-5 shadow-sm ring-1 ring-line/60">
+      <div className="mt-4 rounded-2xl bg-card p-5 shadow-sm ring-1 ring-line/60">
         <Stacked k="legalSoon" className="text-muted" />
       </div>
     </main>

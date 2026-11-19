@@ -3,6 +3,8 @@ import { ArrowLeft, CircleCheck, Hourglass, Info, Send, UserRound, X } from "luc
 import { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { ErrorBanner, SuccessBanner, TextAreaField } from "../../components/Form";
+import { MessageButton } from "../../components/MessageButton";
+import { WorkerPaymentPanel } from "../../components/PaymentParts";
 import { CategoryIcon, JobSummary, LoadError, Loading, StatusBadge } from "../../components/JobParts";
 import { Dual, Stacked } from "../../components/Text";
 import { ApplicationBadge, PersonCard } from "../../components/WorkParts";
@@ -80,7 +82,7 @@ export function WorkJobDetails() {
 
           <div className="grid gap-4 lg:grid-cols-[minmax(0,3fr)_minmax(0,2fr)] lg:items-start lg:gap-6">
             <div className="space-y-4">
-              <div className="rounded-2xl bg-white p-4 shadow-sm ring-1 ring-line/60 lg:p-6">
+              <div className="rounded-2xl bg-card p-4 shadow-sm ring-1 ring-line/60 lg:p-6">
                 <div className="mb-3 flex items-center gap-3 border-b border-line pb-3">
                   <CategoryIcon category={data.category} />
                   <h1 className="min-w-0 flex-1 text-lg font-extrabold">
@@ -99,7 +101,7 @@ export function WorkJobDetails() {
 
             <div className="space-y-4 lg:sticky lg:top-24">
               {application && !(application.status === "WITHDRAWN" && canApply) && (
-                <section aria-labelledby="my-application" className="rounded-2xl bg-white p-4 shadow-sm ring-1 ring-line/60 lg:p-6">
+                <section aria-labelledby="my-application" className="rounded-2xl bg-card p-4 shadow-sm ring-1 ring-line/60 lg:p-6">
                   <div className="flex items-center justify-between gap-2">
                     <h2 id="my-application" className="flex items-center gap-2 font-extrabold">
                       {hired ? (
@@ -123,6 +125,16 @@ export function WorkJobDetails() {
                     </div>
                   )}
 
+                  {application.status === "PENDING" && (
+                    <div className="mt-4">
+                      <MessageButton
+                        jobId={data.id}
+                        conversationId={data.conversationId}
+                        canMessage={data.canMessage}
+                        label="messageCustomer"
+                      />
+                    </div>
+                  )}
                   {application.status === "PENDING" && !confirmingWithdraw && (
                     <button
                       type="button"
@@ -141,7 +153,7 @@ export function WorkJobDetails() {
                           type="button"
                           onClick={() => setConfirmingWithdraw(false)}
                           disabled={withdraw.isPending}
-                          className="min-h-12 rounded-xl bg-white text-sm font-bold ring-1 ring-line disabled:opacity-60"
+                          className="min-h-12 rounded-xl bg-card text-sm font-bold ring-1 ring-line disabled:opacity-60"
                         >
                           <Stacked k="keepApplication" className="leading-tight" />
                         </button>
@@ -149,7 +161,7 @@ export function WorkJobDetails() {
                           type="button"
                           onClick={() => withdraw.mutate()}
                           disabled={withdraw.isPending}
-                          className="min-h-12 rounded-xl bg-danger text-sm font-bold text-white disabled:opacity-60"
+                          className="min-h-12 rounded-xl bg-danger text-sm font-bold text-on-fill disabled:opacity-60"
                         >
                           <Stacked k="confirmWithdraw" className="leading-tight" />
                         </button>
@@ -159,8 +171,10 @@ export function WorkJobDetails() {
                 </section>
               )}
 
+              {hired && <WorkerPaymentPanel job={data} />}
+
               {hired && data.customer && (
-                <section aria-labelledby="customer" className="rounded-2xl bg-white p-4 shadow-sm ring-1 ring-line/60 lg:p-6">
+                <section aria-labelledby="customer" className="rounded-2xl bg-card p-4 shadow-sm ring-1 ring-line/60 lg:p-6">
                   <h2 id="customer" className="mb-3 flex items-center gap-2 font-extrabold">
                     <UserRound className="size-5 text-primary" aria-hidden="true" />
                     <span>
@@ -168,6 +182,14 @@ export function WorkJobDetails() {
                     </span>
                   </h2>
                   <PersonCard person={data.customer} expectContact />
+                  <div className="mt-4">
+                    <MessageButton
+                      jobId={data.id}
+                      conversationId={data.conversationId}
+                      canMessage={data.canMessage}
+                      label="messageCustomer"
+                    />
+                  </div>
                 </section>
               )}
 
@@ -178,7 +200,7 @@ export function WorkJobDetails() {
                     event.preventDefault();
                     if (!tooLong) apply.mutate();
                   }}
-                  className="space-y-4 rounded-2xl bg-white p-4 shadow-sm ring-1 ring-line/60 lg:p-6"
+                  className="space-y-4 rounded-2xl bg-card p-4 shadow-sm ring-1 ring-line/60 lg:p-6"
                 >
                   <h2 id="apply" className="font-extrabold">
                     <Dual k={application?.status === "WITHDRAWN" ? "applyAgain" : "applyTitle"} />
@@ -198,15 +220,15 @@ export function WorkJobDetails() {
                   <button
                     type="submit"
                     disabled={apply.isPending || tooLong}
-                    className="flex min-h-13 w-full items-center justify-center gap-2 rounded-xl bg-secondary px-4 font-display text-base font-extrabold text-ink shadow-sm transition hover:bg-[#e58a1f] disabled:opacity-60"
+                    className="flex min-h-13 w-full items-center justify-center gap-2 rounded-xl bg-secondary px-4 font-display text-base font-extrabold text-on-secondary shadow-sm transition hover:bg-[#e58a1f] disabled:opacity-60"
                   >
                     {apply.isPending ? (
-                      <span className="size-5 animate-spin rounded-full border-[3px] border-ink/25 border-t-ink" role="status" aria-label="Loading" />
+                      <span className="size-5 animate-spin rounded-full border-[3px] border-on-secondary/25 border-t-on-secondary" role="status" aria-label="Loading" />
                     ) : (
                       <>
                         <Send className="size-5" aria-hidden="true" />
                         <span>
-                          <Dual k="applyAction" rwClassName="font-medium text-ink/70" />
+                          <Dual k="applyAction" rwClassName="font-medium text-on-secondary/70" />
                         </span>
                       </>
                     )}
@@ -215,7 +237,7 @@ export function WorkJobDetails() {
               )}
 
               {!canApply && !application && (
-                <div className="rounded-2xl bg-white p-4 text-sm shadow-sm ring-1 ring-line/60">
+                <div className="rounded-2xl bg-card p-4 text-sm shadow-sm ring-1 ring-line/60">
                   <Stacked k="jobClosedText" className="text-muted" />
                 </div>
               )}

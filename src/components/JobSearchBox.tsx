@@ -60,7 +60,7 @@ export function JobSearchBox({ className = "", shortcut = false, autoFocus = fal
     <form
       role="search"
       onSubmit={(event) => event.preventDefault()}
-      className={`items-center gap-2 rounded-xl bg-white px-3.5 ring-1 ring-line transition focus-within:ring-2 focus-within:ring-primary ${className}`}
+      className={`items-center gap-2 rounded-xl bg-card px-3.5 ring-1 ring-line transition focus-within:ring-2 focus-within:ring-primary ${className}`}
     >
       <Search className="size-4.5 shrink-0 text-muted" aria-hidden="true" />
       <input
@@ -75,7 +75,7 @@ export function JobSearchBox({ className = "", shortcut = false, autoFocus = fal
         }}
         placeholder={plain("searchJobs")}
         aria-label={plain("searchJobs")}
-        className="min-w-0 flex-1 bg-transparent py-2.5 text-sm outline-none placeholder:text-gray-500 [&::-webkit-search-cancel-button]:hidden"
+        className="min-w-0 flex-1 bg-transparent py-2.5 text-sm outline-none placeholder:text-muted/70 [&::-webkit-search-cancel-button]:hidden"
       />
       {value ? (
         <button

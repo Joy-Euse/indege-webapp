@@ -1,4 +1,4 @@
-import { Lock, type LucideIcon, ShieldCheck, UserRound } from "lucide-react";
+import { Lock, type LucideIcon, Palette, ShieldCheck, UserRound } from "lucide-react";
 import type { ReactNode } from "react";
 import { NavLink, Outlet } from "react-router-dom";
 import { Dual, Stacked } from "../../components/Text";
@@ -8,6 +8,7 @@ const TABS: { to: string; icon: LucideIcon; label: StringKey }[] = [
   { to: "/settings/profile", icon: UserRound, label: "tabProfile" },
   { to: "/settings/privacy", icon: ShieldCheck, label: "tabPrivacy" },
   { to: "/settings/security", icon: Lock, label: "tabSecurity" },
+  { to: "/settings/appearance", icon: Palette, label: "tabAppearance" },
 ];
 
 /** Settings are the same on both sides of the app, and always about the signed-in user. */
@@ -29,7 +30,7 @@ export function SettingsLayout() {
                 <NavLink
                   to={to}
                   className={({ isActive }) =>
-                    `flex min-h-11 items-center gap-2.5 rounded-full px-4 text-sm font-bold whitespace-nowrap transition lg:rounded-xl ${isActive ? "bg-primary text-white lg:bg-primary-soft lg:text-primary" : "bg-white text-ink ring-1 ring-line hover:ring-primary/40 lg:bg-transparent lg:ring-0 lg:hover:bg-white"}`
+                    `flex min-h-11 items-center gap-2.5 rounded-full px-4 text-sm font-bold whitespace-nowrap transition lg:rounded-xl ${isActive ? "bg-primary text-on-fill lg:bg-primary-soft lg:text-primary" : "bg-card text-ink ring-1 ring-line hover:ring-primary/40 lg:bg-transparent lg:ring-0 lg:hover:bg-card"}`
                   }
                 >
                   <Icon className="size-4.5 shrink-0" aria-hidden="true" />
@@ -70,17 +71,17 @@ export function SaveButton({
       onClick={onClick}
       disabled={busy}
       aria-busy={busy}
-      className={`flex min-h-11 items-center justify-center gap-2 rounded-xl px-5 text-sm font-bold text-white transition disabled:opacity-60 ${colors}`}
+      className={`flex min-h-11 items-center justify-center gap-2 rounded-xl px-5 text-sm font-bold text-on-fill transition disabled:opacity-60 ${colors}`}
     >
-      {busy && <span className="size-4 animate-spin rounded-full border-2 border-white/30 border-t-white" aria-hidden="true" />}
+      {busy && <span className="size-4 animate-spin rounded-full border-2 border-on-fill/30 border-t-on-fill" aria-hidden="true" />}
       <span>
-        <Dual k={label} rwClassName="font-medium text-white/75" />
+        <Dual k={label} rwClassName="font-medium text-on-fill/75" />
       </span>
     </button>
   );
 }
 
-/** A white panel with a heading, used for each group of settings. */
+/** A panel with a heading, used for each group of settings. */
 export function SettingsCard({
   title,
   intro,
@@ -94,7 +95,7 @@ export function SettingsCard({
 }) {
   return (
     <section
-      className={`rounded-2xl bg-white p-5 shadow-sm ring-1 sm:p-6 ${tone === "danger" ? "ring-danger/30" : "ring-line/60"}`}
+      className={`rounded-2xl bg-card p-5 shadow-sm ring-1 sm:p-6 ${tone === "danger" ? "ring-danger/30" : "ring-line/60"}`}
     >
       <h2 className={`text-lg font-extrabold ${tone === "danger" ? "text-danger" : ""}`}>
         <Dual k={title} />

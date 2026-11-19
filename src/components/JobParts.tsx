@@ -94,7 +94,7 @@ export function JobCard<T extends ListJob>({
   return (
     <Link
       to={hrefFor(job)}
-      className="block rounded-2xl bg-white p-4 shadow-sm ring-1 ring-line/60 transition hover:ring-primary/40"
+      className="block rounded-2xl bg-card p-4 shadow-sm ring-1 ring-line/60 transition hover:ring-primary/40"
     >
       <div className="flex items-start gap-3">
         <CategoryIcon category={job.category} />
@@ -171,7 +171,7 @@ function JobTable<T extends ListJob>({
 }: { jobs: T[] } & JobLinkOptions<T>) {
   const head = "px-4 py-3 text-left text-xs font-semibold text-muted";
   return (
-    <div className="hidden overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-line/60 lg:block">
+    <div className="hidden overflow-hidden rounded-2xl bg-card shadow-sm ring-1 ring-line/60 lg:block">
       <table className="w-full table-fixed text-sm">
         <thead className="border-b border-line bg-surface/60">
           <tr>

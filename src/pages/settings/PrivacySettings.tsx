@@ -16,6 +16,7 @@ import {
 } from "../../lib/account";
 import { api } from "../../lib/api";
 import { formatPhone } from "../../lib/phone";
+import { MessageSettings } from "./MessageSettings";
 import { SaveButton, SettingsCard } from "./SettingsLayout";
 
 type PrivacyValues = Pick<OwnProfile, "phoneVisibility" | "emailVisibility" | "locationVisibility">;
@@ -92,6 +93,7 @@ function PrivacyForm({ profile }: { profile: OwnProfile }) {
           </div>
         </form>
       </SettingsCard>
+      <MessageSettings profile={profile} />
       <PublicPreview />
     </>
   );
@@ -123,7 +125,7 @@ function VisibilityChoice({ name, icon: Icon, legend, value, onChange, note }: V
           return (
             <label
               key={option.value}
-              className={`relative flex cursor-pointer flex-col gap-1 rounded-xl p-3 ring-1 transition has-focus-visible:outline-3 has-focus-visible:outline-secondary ${checked ? "bg-primary-soft ring-2 ring-primary" : "bg-white ring-line hover:ring-primary/40"}`}
+              className={`relative flex cursor-pointer flex-col gap-1 rounded-xl p-3 ring-1 transition has-focus-visible:outline-3 has-focus-visible:outline-secondary ${checked ? "bg-primary-soft ring-2 ring-primary" : "bg-card ring-line hover:ring-primary/40"}`}
             >
               <input
                 type="radio"

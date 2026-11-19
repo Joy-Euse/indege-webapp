@@ -1,6 +1,13 @@
 @import "tailwindcss";
 
+/* For the odd style that needs to differ in dark mode. Colors switch on their own through the tokens. */
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+/* Light theme. Every color in the app comes from these, so dark mode only has to redefine them. */
 @theme {
+  /* The brand green itself, for places that stay green in both themes, such as the sign-in panel. */
+  --color-brand: #14532d;
+
   --color-primary: #14532d;
   --color-primary-dark: #0c3a1e;
   --color-primary-soft: #e7f2ea;
@@ -13,12 +20,50 @@
   --color-muted: #4b5563;
   --color-line: #e2e6ee;
   --color-surface: #f6f7f9;
+  /* Panels and cards on the page background. */
+  --color-card: #ffffff;
   --color-field: #eef1f9;
   --color-danger: #b42318;
   --color-danger-soft: #fdecea;
+  /* Text on primary and danger fills. */
+  --color-on-fill: #ffffff;
+  /* Text on the amber secondary buttons, dark in both themes. */
+  --color-on-secondary: #111827;
 
   --font-display: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
   --font-sans: "Roboto", ui-sans-serif, system-ui, sans-serif;
+}
+
+:root {
+  color-scheme: light;
+}
+
+/*
+ * Dark theme. The greens, blues and reds get lighter so they read as text on dark panels, and
+ * filled buttons switch to dark text. src/lib/theme.ts sets data-theme, following the device
+ * when the person chose "Same as device".
+ */
+:root[data-theme="dark"] {
+  color-scheme: dark;
+
+  --color-primary: #5ccb8c;
+  --color-primary-dark: #7fdaa6;
+  --color-primary-soft: #16301f;
+  --color-secondary: #e08a1c;
+  --color-secondary-dark: #f5b041;
+  --color-secondary-soft: #36260c;
+  --color-tertiary: #9db7f2;
+  --color-tertiary-soft: #19254a;
+  --color-ink: #e9edf3;
+  --color-muted: #a5afbd;
+  --color-line: #2c3644;
+  --color-surface: #0e131a;
+  --color-card: #171e28;
+  --color-field: #212a37;
+  --color-danger: #f2877d;
+  --color-danger-soft: #3b1714;
+  --color-on-fill: #07130c;
+  --color-on-secondary: #111827;
 }
 
 body {

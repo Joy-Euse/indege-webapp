@@ -68,7 +68,7 @@ export function FindWork() {
           type="button"
           onClick={() => void search.fetchNextPage()}
           disabled={search.isFetchingNextPage}
-          className="mx-auto flex min-h-12 w-full max-w-xs items-center justify-center rounded-xl bg-white text-sm font-bold text-primary ring-1 ring-primary/30 hover:bg-primary-soft disabled:opacity-60"
+          className="mx-auto flex min-h-12 w-full max-w-xs items-center justify-center rounded-xl bg-card text-sm font-bold text-primary ring-1 ring-primary/30 hover:bg-primary-soft disabled:opacity-60"
         >
           <Dual k="loadMore" rwClassName="font-medium text-primary/70" />
         </button>
@@ -99,7 +99,7 @@ function SearchInput({ value, onChange }: { value: string; onChange: (value: str
     <form
       role="search"
       onSubmit={(event) => event.preventDefault()}
-      className="flex items-center gap-2 rounded-xl bg-white px-3.5 ring-1 ring-line transition focus-within:ring-2 focus-within:ring-primary"
+      className="flex items-center gap-2 rounded-xl bg-card px-3.5 ring-1 ring-line transition focus-within:ring-2 focus-within:ring-primary"
     >
       <Search className="size-4.5 shrink-0 text-muted" aria-hidden="true" />
       <input
@@ -110,7 +110,7 @@ function SearchInput({ value, onChange }: { value: string; onChange: (value: str
         onChange={(event) => setText(event.target.value)}
         placeholder={plain("searchWork")}
         aria-label={plain("searchWork")}
-        className="min-h-11 min-w-0 flex-1 bg-transparent py-2.5 text-sm outline-none placeholder:text-gray-500 [&::-webkit-search-cancel-button]:hidden"
+        className="min-h-11 min-w-0 flex-1 bg-transparent py-2.5 text-sm outline-none placeholder:text-muted/70 [&::-webkit-search-cancel-button]:hidden"
       />
       {text && (
         <button
@@ -139,7 +139,7 @@ interface FilterSelectProps {
 
 function FilterSelect({ label, value, allLabel, options, onChange }: FilterSelectProps) {
   return (
-    <div className="relative flex items-center rounded-xl bg-white ring-1 ring-line transition focus-within:ring-2 focus-within:ring-primary">
+    <div className="relative flex items-center rounded-xl bg-card ring-1 ring-line transition focus-within:ring-2 focus-within:ring-primary">
       <select
         aria-label={label}
         value={value}

@@ -11,7 +11,7 @@ import { Dual, Stacked } from "./Text";
 function HeroPanel({ className = "", children }: { className?: string; children?: ReactNode }) {
   const patternId = `imigongo${useId().replace(/:/g, "")}`;
   return (
-    <div className={`relative overflow-hidden bg-primary text-white ${className}`}>
+    <div className={`relative overflow-hidden bg-brand text-white ${className}`}>
       <svg className="absolute inset-0 text-white/10" width="100%" height="100%" aria-hidden="true">
         <defs>
           <pattern id={patternId} width="56" height="56" patternUnits="userSpaceOnUse">
@@ -65,7 +65,7 @@ export function AuthLayout({ title, intro, children, footer }: AuthLayoutProps) 
           {intro && <div className="mt-1.5 text-sm text-muted">{intro}</div>}
         </div>
 
-        <div className="rounded-2xl bg-white p-5 shadow-sm ring-1 ring-line/60">{children}</div>
+        <div className="rounded-2xl bg-card p-5 shadow-sm ring-1 ring-line/60">{children}</div>
 
         {footer && <div className="mt-4">{footer}</div>}
 

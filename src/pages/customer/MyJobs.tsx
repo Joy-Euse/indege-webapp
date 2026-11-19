@@ -39,7 +39,7 @@ export function MyJobs() {
         </h1>
         <Link
           to="/customer/jobs/new"
-          className="flex min-h-11 shrink-0 items-center gap-1.5 rounded-xl bg-secondary px-3 text-sm font-extrabold text-ink hover:bg-[#e58a1f] md:hidden"
+          className="flex min-h-11 shrink-0 items-center gap-1.5 rounded-xl bg-secondary px-3 text-sm font-extrabold text-on-secondary hover:bg-[#e58a1f] md:hidden"
         >
           <CirclePlus className="size-4" aria-hidden="true" />
           <Stacked k="postJobShort" className="leading-tight" />
@@ -60,12 +60,12 @@ export function MyJobs() {
                 type="button"
                 aria-pressed={selected}
                 onClick={() => chooseFilter(filter.id)}
-                className={`flex min-h-11 items-center gap-2 rounded-full px-4 text-sm font-bold whitespace-nowrap transition ${selected ? "bg-primary text-white" : "bg-white text-ink ring-1 ring-line hover:ring-primary/40"}`}
+                className={`flex min-h-11 items-center gap-2 rounded-full px-4 text-sm font-bold whitespace-nowrap transition ${selected ? "bg-primary text-on-fill" : "bg-card text-ink ring-1 ring-line hover:ring-primary/40"}`}
               >
-                <Dual k={filter.label} rwClassName={selected ? "font-medium text-white/75" : "font-medium text-muted"} />
+                <Dual k={filter.label} rwClassName={selected ? "font-medium text-on-fill/75" : "font-medium text-muted"} />
                 {count !== null && (
                   <span
-                    className={`rounded-full px-2 py-0.5 text-xs tabular-nums ${selected ? "bg-white/20" : "bg-field text-muted"}`}
+                    className={`rounded-full px-2 py-0.5 text-xs tabular-nums ${selected ? "bg-on-fill/20" : "bg-field text-muted"}`}
                   >
                     {count}
                   </span>
@@ -81,7 +81,7 @@ export function MyJobs() {
           query={search}
           jobs={jobs}
           empty={
-            <div className="rounded-2xl bg-white p-6 text-sm shadow-sm ring-1 ring-line/60">
+            <div className="rounded-2xl bg-card p-6 text-sm shadow-sm ring-1 ring-line/60">
               <Stacked k={q ? "noSearchResults" : "noJobsHere"} className="text-muted" />
             </div>
           }
@@ -93,7 +93,7 @@ export function MyJobs() {
           type="button"
           onClick={() => void search.fetchNextPage()}
           disabled={search.isFetchingNextPage}
-          className="mx-auto flex min-h-12 w-full max-w-xs items-center justify-center rounded-xl bg-white text-sm font-bold text-primary ring-1 ring-primary/30 hover:bg-primary-soft disabled:opacity-60"
+          className="mx-auto flex min-h-12 w-full max-w-xs items-center justify-center rounded-xl bg-card text-sm font-bold text-primary ring-1 ring-primary/30 hover:bg-primary-soft disabled:opacity-60"
         >
           <Dual k="loadMore" rwClassName="font-medium text-primary/70" />
         </button>

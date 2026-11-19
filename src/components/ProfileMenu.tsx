@@ -15,7 +15,7 @@ export function Avatar({ name, size = "md" }: { name: string; size?: "md" | "lg"
   return (
     <span
       aria-hidden="true"
-      className={`grid shrink-0 place-items-center rounded-full bg-primary font-display font-extrabold text-white ${sizes}`}
+      className={`grid shrink-0 place-items-center rounded-full bg-primary font-display font-extrabold text-on-fill ${sizes}`}
     >
       {initialsOf(name)}
     </span>
@@ -152,7 +152,7 @@ export function ProfileMenu({ placement }: ProfileMenuProps) {
         inViewport(
           sheet,
           <>
-            {sheet && <div className="fixed inset-0 z-40 bg-ink/40" aria-hidden="true" />}
+            {sheet && <div className="fixed inset-0 z-40 bg-black/50" aria-hidden="true" />}
             <div
               ref={menuRef}
               id={menuId}
@@ -161,8 +161,8 @@ export function ProfileMenu({ placement }: ProfileMenuProps) {
               onKeyDown={onMenuKeyDown}
               className={
                 sheet
-                  ? "fixed inset-x-0 bottom-0 z-50 max-h-[85dvh] overflow-y-auto rounded-t-3xl bg-white p-4 pb-[calc(1rem+env(safe-area-inset-bottom))] shadow-2xl"
-                  : "absolute bottom-0 left-full z-50 ml-3 w-72 rounded-2xl bg-white p-2 shadow-xl ring-1 ring-line xl:bottom-full xl:left-0 xl:mb-2 xl:ml-0"
+                  ? "fixed inset-x-0 bottom-0 z-50 max-h-[85dvh] overflow-y-auto rounded-t-3xl bg-card p-4 pb-[calc(1rem+env(safe-area-inset-bottom))] shadow-2xl"
+                  : "absolute bottom-0 left-full z-50 ml-3 w-72 rounded-2xl bg-card p-2 shadow-xl ring-1 ring-line xl:bottom-full xl:left-0 xl:mb-2 xl:ml-0"
               }
             >
               {sheet && <div className="mx-auto mb-3 h-1.5 w-10 rounded-full bg-line" aria-hidden="true" />}

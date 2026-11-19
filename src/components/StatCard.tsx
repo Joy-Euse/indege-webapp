@@ -27,7 +27,7 @@ export function StatCard({ icon: Icon, label, value, tone, to }: StatCardProps) 
       </p>
     </>
   );
-  const box = "block h-full rounded-2xl bg-white p-4 shadow-sm ring-1 ring-line/60 lg:p-5";
+  const box = "block h-full rounded-2xl bg-card p-4 shadow-sm ring-1 ring-line/60 lg:p-5";
   return (
     <li>
       {to ? (

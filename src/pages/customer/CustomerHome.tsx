@@ -24,7 +24,7 @@ export function CustomerHome() {
 
       <Link
         to="/customer/jobs/new"
-        className="flex items-center gap-3 rounded-2xl bg-secondary p-4 text-ink shadow-sm transition hover:bg-[#e58a1f] md:hidden"
+        className="flex items-center gap-3 rounded-2xl bg-secondary p-4 text-on-secondary shadow-sm transition hover:bg-[#e58a1f] md:hidden"
       >
         <CirclePlus className="size-8 shrink-0" aria-hidden="true" />
         <span className="min-w-0 flex-1">
@@ -71,7 +71,7 @@ export function CustomerHome() {
             query={active}
             jobs={active.data?.jobs}
             empty={
-              <div className="rounded-2xl bg-white p-6 text-sm shadow-sm ring-1 ring-line/60">
+              <div className="rounded-2xl bg-card p-6 text-sm shadow-sm ring-1 ring-line/60">
                 <Stacked k="noJobsYet" className="text-muted" />
               </div>
             }
@@ -89,7 +89,7 @@ export function CustomerHome() {
                 <Link
                   key={category}
                   to={`/customer/jobs/new?category=${category}`}
-                  className="flex min-h-16 items-center gap-2.5 rounded-xl bg-white p-3 shadow-sm ring-1 ring-line/60 transition hover:ring-primary/40"
+                  className="flex min-h-16 items-center gap-2.5 rounded-xl bg-card p-3 shadow-sm ring-1 ring-line/60 transition hover:ring-primary/40"
                 >
                   <span className={`grid size-10 shrink-0 place-items-center rounded-lg ${TILE_TONES[index % TILE_TONES.length]}`}>
                     <Icon className="size-5" aria-hidden="true" />
