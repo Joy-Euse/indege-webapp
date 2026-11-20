@@ -1,6 +1,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@tanstack/react-query";
-import { ChevronRight, UserPlus, Zap } from "lucide-react";
+import { UserPlus, Zap } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { Link, useLocation } from "react-router-dom";
 import type { z } from "zod";
@@ -42,22 +42,18 @@ export function Login() {
             </span>
             <span className="h-px flex-1 bg-line" />
           </div>
+          <p className="mb-2.5 text-center text-sm font-bold">
+            <Dual k="noAccount" rwClassName="font-medium text-muted" />
+          </p>
+          {/* Outlined so the orange Log in stays the main action, but as big and as bold. */}
           <Link
             to="/register"
-            className="flex items-center gap-3 rounded-2xl bg-card p-3.5 shadow-sm ring-1 ring-line/60 transition hover:ring-primary"
+            className="flex min-h-13 w-full items-center justify-center gap-2 rounded-xl border-2 border-primary bg-card px-4 py-2 text-center font-display text-base font-extrabold text-primary shadow-sm transition hover:bg-primary hover:text-on-fill"
           >
-            <span className="grid size-10 shrink-0 place-items-center rounded-full bg-secondary-soft text-secondary-dark">
-              <UserPlus className="size-5" aria-hidden="true" />
+            <UserPlus className="size-5 shrink-0" aria-hidden="true" />
+            <span>
+              <Dual k="createFreeAccount" rwClassName="" />
             </span>
-            <span className="min-w-0 flex-1 text-sm">
-              <span className="block font-bold">
-                <Dual k="noAccount" />
-              </span>
-              <span className="block text-xs text-muted">
-                <Dual k="signUpAction" rwClassName="text-muted" />
-              </span>
-            </span>
-            <ChevronRight className="size-5 shrink-0 text-muted" aria-hidden="true" />
           </Link>
         </>
       }

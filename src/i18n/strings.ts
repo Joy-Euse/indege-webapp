@@ -13,6 +13,7 @@ export const strings = {
   or: { en: "OR", rw: "CYANGWA" },
   noAccount: { en: "Don't have an account?", rw: "Nta konti ufite?" },
   signUpAction: { en: "Create one for free", rw: "Iyandikishe ku buntu" }, // DRAFT
+  createFreeAccount: { en: "Create a free account", rw: "Iyandikishe ku buntu" }, // DRAFT
   loginRouting: { en: "One login for Umukiriya (Customer) and Umukozi (Worker) accounts.", rw: "Kwinjira kumwe ku bakiriya n'abakozi." }, // DRAFT
   phoneHint: { en: "MTN and Airtel Rwanda numbers", rw: "Nimero za MTN na Airtel" }, // DRAFT
   trustLine: { en: "Free to join. Every phone number is confirmed by SMS.", rw: "Kwiyandikisha ni ubuntu. Nimero yose yemezwa na SMS." }, // DRAFT
