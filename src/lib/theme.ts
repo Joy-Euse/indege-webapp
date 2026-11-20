@@ -18,13 +18,16 @@ export function isThemeChoice(value: unknown): value is ThemeChoice {
   return typeof value === "string" && (THEME_CHOICES as readonly string[]).includes(value);
 }
 
-/** Kept on this device only. Storage can be blocked, so anything unreadable means "system". */
+/** Light unless the person picked something else on this device. */
+export const DEFAULT_THEME_CHOICE: ThemeChoice = "light";
+
+/** Kept on this device only. Storage can be blocked, so anything unreadable means the default. */
 export function readThemeChoice(): ThemeChoice {
   try {
     const stored = localStorage.getItem(THEME_STORAGE_KEY);
-    return isThemeChoice(stored) ? stored : "system";
+    return isThemeChoice(stored) ? stored : DEFAULT_THEME_CHOICE;
   } catch {
-    return "system";
+    return DEFAULT_THEME_CHOICE;
   }
 }
 
@@ -40,12 +43,12 @@ export function applyTheme(choice: ThemeChoice = readThemeChoice()): void {
 }
 
 const listeners = new Set<() => void>();
-let current: ThemeChoice = typeof window === "undefined" ? "system" : readThemeChoice();
+let current: ThemeChoice = typeof window === "undefined" ? DEFAULT_THEME_CHOICE : readThemeChoice();
 
 export function setThemeChoice(choice: ThemeChoice): void {
   current = choice;
   try {
-    if (choice === "system") localStorage.removeItem(THEME_STORAGE_KEY);
+    if (choice === DEFAULT_THEME_CHOICE) localStorage.removeItem(THEME_STORAGE_KEY);
     else localStorage.setItem(THEME_STORAGE_KEY, choice);
   } catch {
     // Still applies for this visit.

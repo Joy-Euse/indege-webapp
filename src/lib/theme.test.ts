@@ -28,16 +28,16 @@ describe("readThemeChoice", () => {
     expect(readThemeChoice()).toBe("dark");
   });
 
-  it("falls back to the device for anything unknown or unreadable", () => {
+  it("falls back to light for anything unknown or unreadable", () => {
     vi.stubGlobal("localStorage", storageWith(() => "purple"));
-    expect(readThemeChoice()).toBe("system");
+    expect(readThemeChoice()).toBe("light");
     vi.stubGlobal(
       "localStorage",
       storageWith(() => {
         throw new Error("blocked");
       }),
     );
-    expect(readThemeChoice()).toBe("system");
+    expect(readThemeChoice()).toBe("light");
   });
 
   it("uses the key the startup script in index.html reads", () => {
