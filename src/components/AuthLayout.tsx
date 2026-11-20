@@ -1,7 +1,8 @@
 import { ShieldCheck } from "lucide-react";
 import { type ReactNode, useId } from "react";
 import type { StringKey } from "../i18n/strings";
-import { Logo } from "./Logo";
+import { CATEGORY_ICONS } from "./JobParts";
+import { Logo, LogoMark } from "./Logo";
 import { Dual, Stacked } from "./Text";
 
 /**
@@ -29,6 +30,44 @@ function HeroPanel({ className = "", children }: { className?: string; children?
   );
 }
 
+/**
+ * The INDEGE mark with the job categories circling it: people who need help meeting workers.
+ * The ring turns slowly while each icon stays upright. Still for people who ask for reduced motion.
+ */
+function HeroIllustration() {
+  const icons = Object.values(CATEGORY_ICONS);
+  return (
+    <div className="relative aspect-square w-full max-w-[min(22rem,42vh)]" aria-hidden="true">
+      <div className="absolute inset-[8%] rounded-full border border-dashed border-white/25" />
+      <div className="absolute inset-[30%] rounded-full bg-white/5 ring-1 ring-white/15" />
+
+      <div className="absolute inset-0 animate-[spin_60s_linear_infinite] motion-reduce:animate-none">
+        {icons.map((Icon, index) => {
+          const angle = (index / icons.length) * 2 * Math.PI - Math.PI / 2;
+          return (
+            <div
+              key={index}
+              className="absolute w-[17%] -translate-x-1/2 -translate-y-1/2"
+              style={{ left: `${50 + 42 * Math.cos(angle)}%`, top: `${50 + 42 * Math.sin(angle)}%` }}
+            >
+              <div className="grid aspect-square w-full animate-[spin_60s_linear_infinite_reverse] place-items-center rounded-2xl bg-white/12 shadow-lg ring-1 ring-white/20 backdrop-blur-sm motion-reduce:animate-none">
+                <Icon className={`size-1/2 ${index % 2 ? "text-secondary" : "text-white"}`} strokeWidth={1.75} />
+              </div>
+            </div>
+          );
+        })}
+      </div>
+
+      <div className="absolute inset-[36%] grid place-items-center">
+        <span className="absolute inset-0 animate-[ping_3s_cubic-bezier(0,0,0.2,1)_infinite] rounded-[28%] bg-white/20 motion-reduce:hidden" />
+        <div className="relative w-full drop-shadow-xl [&>svg]:size-full">
+          <LogoMark />
+        </div>
+      </div>
+    </div>
+  );
+}
+
 interface AuthLayoutProps {
   title: StringKey;
   intro?: ReactNode;
@@ -40,8 +79,11 @@ export function AuthLayout({ title, intro, children, footer }: AuthLayoutProps) 
   return (
     <div className="min-h-dvh lg:grid lg:grid-cols-[minmax(0,5fr)_minmax(0,6fr)]">
       <HeroPanel className="hidden lg:block">
-        <div className="flex h-full flex-col justify-between p-12">
+        <div className="flex h-full flex-col justify-between gap-8 p-12">
           <Logo light />
+          <div className="flex flex-1 items-center justify-center">
+            <HeroIllustration />
+          </div>
           <div className="max-w-md">
             <h2 className="text-4xl font-extrabold leading-tight">
               <Stacked k="heroTitle" />
